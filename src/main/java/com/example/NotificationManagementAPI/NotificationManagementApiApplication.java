@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class NotificationManagementApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NotificationManagementApiApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(NotificationManagementApiApplication.class, args);
+    }
 }
