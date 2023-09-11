@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class NotificationController {
@@ -27,8 +28,9 @@ public class NotificationController {
     }
 
     @GetMapping("/notifications")
-    public List<Notification> get(@RequestParam(name = "name", required = false) String name, @RequestParam(name = "elapsedDays", required = false) Integer elapsedDays, @RequestParam(name = "sendingTimes", required = false) int sendingTimes, @RequestParam(name = "response", required = false) String response) {
-        LocalDate borderDay = LocalDate.now().minusDays(elapsedDays);
+    public List<Notification> get(@RequestParam(name = "name", required = false) String name, @RequestParam(name = "elapsedDays", required = false) Integer elapsedDays, @RequestParam(name = "sendingTimes", required = false) Integer sendingTimes, @RequestParam(name = "response", required = false) String response) {
+        Optional<Integer> nullableDays = Optional.ofNullable(elapsedDays);
+        LocalDate borderDay = LocalDate.now().minusDays(nullableDays.orElse(0));
         return notificationService.findByConditions(name, borderDay, sendingTimes, response);
     }
 

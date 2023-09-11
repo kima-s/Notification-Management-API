@@ -16,12 +16,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> findAll() {
-        return notificationMapper.findAll();
-    }
-
-    @Override
-    public List<Notification> findByConditions(String name, LocalDate borderDay, int sendingTimes, String response) {
+    public List<Notification> findByConditions(String name, LocalDate borderDay, Integer sendingTimes, String response) {
         return notificationMapper.findByConditions(name, borderDay, sendingTimes, response);
     }
 
