@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import { CreateSearchNotification } from '../components/pages/CreateSearchNotification';
-import { EditNotification } from '../components/pages/EditNotification';
-import { NotFound } from '../components/pages/NotFound';
+import { CreateSearchNotification } from '../pages/CreateSearchDeleteNotification';
+import { EditNotification } from '../pages/EditNotification';
+import { NotFound } from '../pages/NotFound';
 
 export const Router = () => {
     return (
