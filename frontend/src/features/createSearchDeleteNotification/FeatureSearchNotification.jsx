@@ -11,12 +11,13 @@ import {
     Flex,
 } from "@chakra-ui/react";
 
-export const FeatureSearchNotification = () => {
-
+export const FeatureSearchNotification = (props) => {
+    const { handleValueChange } = props;
     const [searchName, setSearchName] = useState("");
     const [searchElapsedDays, setSearchElapsedDays] = useState("");
     const [searchSendingTimes, setSearchSendingTimes] = useState();
     const [searchResponse, setSearchResponse] = useState("");
+
 
     const onChangeSearchName = (e) => setSearchName(e.target.value);
     const onChangeSearchElapsedDays = (e) => setSearchElapsedDays(e.target.value);
@@ -29,7 +30,7 @@ export const FeatureSearchNotification = () => {
                 params:
                     { "name": searchName, "elapsedDays": searchElapsedDays, "sendingTimes": searchSendingTimes, "response": searchResponse }
             })
-            .then(response => console.log(response.data))
+            .then(response => handleValueChange(response.data))
             .catch((e) => {
                 console.log(e);
             });
