@@ -11,7 +11,21 @@ import {
     Flex,
 } from "@chakra-ui/react";
 
-export const FeatureSearchResultNotification = () => {
+export const FeatureSearchResultNotification = (props) => {
+
+    const { resultNotifications, handleValueDelete } = props;
+
+    const deleteNotification = (id) => {
+        axios
+            .delete("http://localhost:8080/notifications/" + id, { data: resultNotifications })
+            .then(response => {
+                console.log(response);
+                handleValueDelete(id);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
 
     return (
         <Box py={5}>
@@ -29,42 +43,20 @@ export const FeatureSearchResultNotification = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            <Tr>
-                                <Td>A</Td>
-                                <Td>B</Td>
-                                <Td>C</Td>
-                                <Td>D</Td>
-                                <Td>E</Td>
-                                <Td>
-                                    <Button colorScheme='teal' size='sm'>
-                                        削除
-                                    </Button>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td>A</Td>
-                                <Td>B</Td>
-                                <Td>C</Td>
-                                <Td>D</Td>
-                                <Td>E</Td>
-                                <Td>
-                                    <Button colorScheme='teal' size='sm'>
-                                        削除
-                                    </Button>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td>A</Td>
-                                <Td>B</Td>
-                                <Td>C</Td>
-                                <Td>D</Td>
-                                <Td>E</Td>
-                                <Td>
-                                    <Button colorScheme='teal' size='sm'>
-                                        削除
-                                    </Button>
-                                </Td>
-                            </Tr>
+                            {resultNotifications.map((resultNotifications, index) => (
+                                <Tr key={index} >
+                                    <Td>{resultNotifications.name}</Td>
+                                    <Td>{resultNotifications.address}</Td>
+                                    <Td>{resultNotifications.postingDate}</Td>
+                                    <Td>{resultNotifications.sendingTimes}</Td>
+                                    <Td>{resultNotifications.response}</Td>
+                                    <Td>
+                                        <Button colorScheme='teal' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
+                                            削除
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            ))}
                         </Tbody>
                     </Table>
                 </TableContainer>

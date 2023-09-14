@@ -15,13 +15,24 @@ import { FeatureSearchNotification } from "../features/createSearchDeleteNotific
 import { FeatureSearchResultNotification } from "../features/createSearchDeleteNotification/FeatureSearchResultNotification";
 
 export const CreateSearchNotification = () => {
+
+    const [resultNotifications, setResultNotifications] = useState([]);
+
+    const handleValueChange = (newValue) => {
+        setResultNotifications(newValue);
+    };
+
+    const handleValueDelete = (id) => {
+        setResultNotifications(resultNotifications.filter((notification) => notification.id !== id));
+    };
+
     return (
         <Box px={10} py={5}>
             <FeatureCreateNotification />
             <br />
-            <FeatureSearchNotification />
+            <FeatureSearchNotification handleValueChange={handleValueChange} />
             <br />
-            <FeatureSearchResultNotification />
+            <FeatureSearchResultNotification resultNotifications={resultNotifications} handleValueDelete={handleValueDelete} />
         </Box>
     );
 };
