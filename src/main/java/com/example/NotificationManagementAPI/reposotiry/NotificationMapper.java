@@ -18,7 +18,7 @@ public interface NotificationMapper {
             + "  AND name LIKE '${name}'"
             + "</if>"
             + "<if test='borderDay != null'>"
-            + "  AND posting_date <![CDATA[<]]> '${borderDay}'"
+            + "  AND posting_date <![CDATA[<]]>= '${borderDay}'"
             + "</if>"
             + "<if test='sendingTimes != null'>"
             + "  AND sending_times = ${sendingTimes}"
