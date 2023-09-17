@@ -15,7 +15,7 @@ export const FeatureSearchNotification = (props) => {
     const { handleValueChange } = props;
     const [searchName, setSearchName] = useState("");
     const [searchElapsedDays, setSearchElapsedDays] = useState("");
-    const [searchSendingTimes, setSearchSendingTimes] = useState();
+    const [searchSendingTimes, setSearchSendingTimes] = useState("");
     const [searchResponse, setSearchResponse] = useState("");
 
 
@@ -85,7 +85,5 @@ export const FeatureSearchNotification = (props) => {
                 </Wrap>
             </Box>
         </Box>
-
-
     );
 };

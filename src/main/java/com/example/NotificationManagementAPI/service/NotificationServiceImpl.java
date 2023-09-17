@@ -1,11 +1,13 @@
 package com.example.NotificationManagementAPI.service;
 
 import com.example.NotificationManagementAPI.entity.Notification;
+import com.example.NotificationManagementAPI.exception.ResourceNotFoundException;
 import com.example.NotificationManagementAPI.reposotiry.NotificationMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -13,6 +15,12 @@ public class NotificationServiceImpl implements NotificationService {
 
     public NotificationServiceImpl(NotificationMapper notificationMapper) {
         this.notificationMapper = notificationMapper;
+    }
+    
+    @Override
+    public Notification findById(int id) {
+        Optional<Notification> notification = this.notificationMapper.findById(id);
+        return notification.orElseThrow(() -> new ResourceNotFoundException("resource not found"));
     }
 
     @Override
