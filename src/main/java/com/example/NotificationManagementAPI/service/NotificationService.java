@@ -7,6 +7,8 @@ import java.util.List;
 
 
 public interface NotificationService {
+    
+    Notification findById(int id);
 
     List<Notification> findByConditions(String name, LocalDate borderDay, Integer sendingTimes, String response);
 

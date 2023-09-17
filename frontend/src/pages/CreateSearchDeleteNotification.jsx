@@ -14,7 +14,7 @@ import { FeatureCreateNotification } from "../features/createSearchDeleteNotific
 import { FeatureSearchNotification } from "../features/createSearchDeleteNotification/FeatureSearchNotification";
 import { FeatureSearchResultNotification } from "../features/createSearchDeleteNotification/FeatureSearchResultNotification";
 
-export const CreateSearchNotification = () => {
+export const CreateSearchDeleteNotification = () => {
 
     const [resultNotifications, setResultNotifications] = useState([]);
 

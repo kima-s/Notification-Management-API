@@ -20,12 +20,17 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
 public class NotificationController {
     private final NotificationService notificationService;
 
     public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
+    }
+
+    @GetMapping("/notifications/{id}")
+    public Notification getById(@PathVariable("id") int id) {
+        return notificationService.findById(id);
     }
 
     @GetMapping("/notifications")

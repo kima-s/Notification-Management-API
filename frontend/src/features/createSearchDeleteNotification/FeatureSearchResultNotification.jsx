@@ -10,6 +10,7 @@ import {
     TableContainer,
     Flex,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const FeatureSearchResultNotification = (props) => {
 
@@ -45,7 +46,9 @@ export const FeatureSearchResultNotification = (props) => {
                         <Tbody>
                             {resultNotifications.map((resultNotifications, index) => (
                                 <Tr key={index} >
-                                    <Td>{resultNotifications.name}</Td>
+                                    <Td color={"blue"}>
+                                        <Link to={"/EditNotification/" + resultNotifications.id} >{resultNotifications.name}</Link>
+                                    </Td>
                                     <Td>{resultNotifications.address}</Td>
                                     <Td>{resultNotifications.postingDate}</Td>
                                     <Td>{resultNotifications.sendingTimes}</Td>
@@ -61,6 +64,6 @@ export const FeatureSearchResultNotification = (props) => {
                     </Table>
                 </TableContainer>
             </Box>
-        </Box>
+        </Box >
     )
 };
