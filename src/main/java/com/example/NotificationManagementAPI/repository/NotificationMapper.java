@@ -1,4 +1,4 @@
-package com.example.NotificationManagementAPI.reposotiry;
+package com.example.NotificationManagementAPI.repository;
 
 import com.example.NotificationManagementAPI.entity.Notification;
 import org.apache.ibatis.annotations.*;
@@ -18,16 +18,16 @@ public interface NotificationMapper {
             + " id,name,address,posting_date AS postingDate,sending_times AS sendingTimes,response"
             + " FROM notifications"
             + "<where>"
-            + "<if test=' name != null '>"
+            + "<if test=' name != null and name != \"\"'>"
             + "  AND name LIKE '${name}'"
             + "</if>"
-            + "<if test=' borderDay != null'>"
+            + "<if test=' borderDay != null '>"
             + "  AND posting_date <![CDATA[<]]>= '${borderDay}'"
             + "</if>"
-            + "<if test=' sendingTimes != null'>"
+            + "<if test=' sendingTimes != null '>"
             + "  AND sending_times = ${sendingTimes}"
             + "</if>"
-            + "<if test=' response != null'>"
+            + "<if test=' response != null and response != \"\"'>"
             + "  AND response LIKE '${response}'"
             + "</if>"
             + "</where>"

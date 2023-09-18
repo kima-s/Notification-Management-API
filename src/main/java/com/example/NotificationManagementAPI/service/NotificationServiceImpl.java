@@ -2,7 +2,7 @@ package com.example.NotificationManagementAPI.service;
 
 import com.example.NotificationManagementAPI.entity.Notification;
 import com.example.NotificationManagementAPI.exception.ResourceNotFoundException;
-import com.example.NotificationManagementAPI.reposotiry.NotificationMapper;
+import com.example.NotificationManagementAPI.repository.NotificationMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
