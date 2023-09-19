@@ -11,7 +11,9 @@ import {
     Flex,
 } from "@chakra-ui/react";
 
-export const FeatureCreateNotification = () => {
+export const FeatureCreateNotification = (props) => {
+
+    const { handleValueChange } = props;
 
     const [newName, setNewName] = useState("");
     const [newAddress, setNewAddress] = useState("");
@@ -32,6 +34,12 @@ export const FeatureCreateNotification = () => {
             .catch((e) => {
                 console.log(e);
             });
+        axios
+            .get("http://localhost:8080/notifications")
+            .then((response) => {
+                handleValueChange(response.data);
+            })
+            .catch(error => console.log(error));
     };
 
     return (

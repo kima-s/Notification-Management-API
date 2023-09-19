@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
     Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
@@ -18,6 +18,14 @@ export const CreateSearchDeleteNotification = () => {
 
     const [resultNotifications, setResultNotifications] = useState([]);
 
+    useEffect(() => {
+        axios.get("http://localhost:8080/notifications")
+            .then(response => {
+                setResultNotifications(response.data);
+            })
+            .catch(error => console.log(error))
+    }, [])
+
     const handleValueChange = (newValue) => {
         setResultNotifications(newValue);
     };
@@ -28,7 +36,7 @@ export const CreateSearchDeleteNotification = () => {
 
     return (
         <Box px={10} py={5}>
-            <FeatureCreateNotification />
+            <FeatureCreateNotification handleValueChange={handleValueChange} />
             <br />
             <FeatureSearchNotification handleValueChange={handleValueChange} />
             <br />
