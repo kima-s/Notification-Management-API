@@ -16,6 +16,7 @@ export const FeatureSearchResultNotification = (props) => {
 
     const { resultNotifications, handleValueDelete } = props;
 
+
     const deleteNotification = (id) => {
         axios
             .delete("http://localhost:8080/notifications/" + id, { data: resultNotifications })

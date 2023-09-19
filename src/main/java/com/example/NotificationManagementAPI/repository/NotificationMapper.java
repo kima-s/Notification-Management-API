@@ -19,7 +19,7 @@ public interface NotificationMapper {
             + " FROM notifications"
             + "<where>"
             + "<if test=' name != null and name != \"\"'>"
-            + "  AND name LIKE '${name}'"
+            + "  AND name LIKE '%${name}%'"
             + "</if>"
             + "<if test=' borderDay != null '>"
             + "  AND posting_date <![CDATA[<]]>= '${borderDay}'"
@@ -31,6 +31,7 @@ public interface NotificationMapper {
             + "  AND response LIKE '${response}'"
             + "</if>"
             + "</where>"
+            + " ORDER BY postingDate"
             + "</script>")
     List<Notification> findByConditions(String name, LocalDate borderDay, Integer sendingTimes, String response);
 
