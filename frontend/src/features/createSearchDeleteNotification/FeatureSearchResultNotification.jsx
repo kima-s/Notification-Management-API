@@ -55,7 +55,7 @@ export const FeatureSearchResultNotification = (props) => {
                                     <Td>{resultNotifications.sendingTimes}</Td>
                                     <Td>{resultNotifications.response}</Td>
                                     <Td>
-                                        <Button colorScheme='teal' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
+                                        <Button colorScheme='orange' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
                                             削除
                                         </Button>
                                     </Td>

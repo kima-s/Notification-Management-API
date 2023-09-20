@@ -87,7 +87,7 @@ export const EditNotification = () => {
                             <Box>
                                 <FormControl>
                                     <FormLabel>名前</FormLabel>
-                                    <Input width={"240px"} placeholder="田中 太郎" value={name} onChange={onChangeName} />
+                                    <Input width={"240px"} placeholder="田中　太郎" value={name} onChange={onChangeName} />
                                 </FormControl>
                             </Box>
                             <Box>
@@ -126,11 +126,11 @@ export const EditNotification = () => {
                         <br />
                         <Stack spacing={4} align='center' direction='row'>
                             <Link to="/">
-                                <Button colorScheme='teal' size='sm' >
+                                <Button colorScheme='orange' size='sm' >
                                     戻る
                                 </Button>
                             </Link>
-                            <Button colorScheme='teal' size='sm' onClick={onClickUpdate}>
+                            <Button colorScheme='orange' size='sm' onClick={onClickUpdate}>
                                 更新
                             </Button>
                         </Stack>
