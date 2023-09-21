@@ -11,8 +11,11 @@ import {
     Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useMessage } from "../../hooks/useMessage";
 
 export const FeatureSearchResultNotification = (props) => {
+
+    const { showMessage } = useMessage();
 
     const { resultNotifications, handleValueDelete } = props;
 
@@ -23,6 +26,9 @@ export const FeatureSearchResultNotification = (props) => {
             .then(response => {
                 console.log(response);
                 handleValueDelete(id);
+                showMessage({
+                    title: "削除に成功しました。", status: "success"
+                })
             })
             .catch((e) => {
                 console.log(e);
@@ -55,7 +61,7 @@ export const FeatureSearchResultNotification = (props) => {
                                     <Td>{resultNotifications.sendingTimes}</Td>
                                     <Td>{resultNotifications.response}</Td>
                                     <Td>
-                                        <Button colorScheme='teal' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
+                                        <Button colorScheme='orange' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
                                             削除
                                         </Button>
                                     </Td>

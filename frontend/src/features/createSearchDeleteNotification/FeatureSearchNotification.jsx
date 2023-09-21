@@ -30,7 +30,9 @@ export const FeatureSearchNotification = (props) => {
                 params:
                     { "name": searchName, "elapsedDays": searchElapsedDays, "sendingTimes": searchSendingTimes, "response": searchResponse }
             })
-            .then(response => handleValueChange(response.data))
+            .then(response =>
+                handleValueChange(response.data)
+            )
             .catch((e) => {
                 console.log(e);
             });
@@ -40,13 +42,13 @@ export const FeatureSearchNotification = (props) => {
         <Box py={5}>
             <Heading size="lg">検索条件入力</Heading>
             <Box>
-                <Text fontSize="lg">お知らせ状況の検索条件を入力してください</Text>
+                <Text fontSize="lg">お知らせ送付状況の検索条件を入力してください</Text>
                 <br />
                 <Wrap spacing={10}>
                     <Box>
                         <FormControl>
                             <FormLabel>名前</FormLabel>
-                            <Input width={"240px"} placeholder="田中 太郎" value={searchName} onChange={onChangeSearchName} />
+                            <Input width={"240px"} placeholder="田中　太郎" value={searchName} onChange={onChangeSearchName} />
                         </FormControl>
                     </Box>
                     <Box>
@@ -77,7 +79,7 @@ export const FeatureSearchNotification = (props) => {
                     </Box >
                     <Stack spacing={4} direction='row'>
                         <Flex alignItems="flex-end">
-                            <Button colorScheme='teal' size='sm' onClick={onClickSearch}>
+                            <Button colorScheme='orange' size='sm' onClick={onClickSearch}>
                                 検索
                             </Button>
                         </Flex>

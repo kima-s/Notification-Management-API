@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -13,12 +13,21 @@ import {
     Flex,
 } from "@chakra-ui/react";
 import { FeatureEditNotification } from "../features/editNotification/FeatureEditNotification";
+import { useMessage } from "../hooks/useMessage";
 
 export const EditNotification = () => {
+
+    const { showMessage } = useMessage();
 
     const { id } = useParams();
 
     const navigate = useNavigate()
+
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [postingDate, setPostingDate] = useState("");
+    const [sendingTimes, setSendingTimes] = useState();
+    const [response, setResponse] = useState("");
 
     const [notification, setNotification] = useState(
         {
@@ -29,17 +38,6 @@ export const EditNotification = () => {
             response: "",
         }
     );
-    const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
-    const [postingDate, setPostingDate] = useState("");
-    const [sendingTimes, setSendingTimes] = useState();
-    const [response, setResponse] = useState("");
-
-    const onChangeName = (e) => setName(e.target.value);
-    const onChangeAddress = (e) => setAddress(e.target.value);
-    const onChangePostingDate = (e) => setPostingDate(e.target.value);
-    const onChangeSendingTimes = (e) => setSendingTimes(e.target.value);
-    const onChangeResponse = (e) => setResponse(e.target.value);
 
     useEffect(() => {
         axios.get("http://localhost:8080/notifications/" + id)
@@ -49,17 +47,16 @@ export const EditNotification = () => {
             .catch(error => console.log(error))
     }, [id])
 
-    useEffect(() => {
-        setName(notification.name);
-        setAddress(notification.address);
-        setPostingDate(notification.postingDate);
-        setSendingTimes(notification.sendingTimes);
-        setResponse(notification.response);
-    }, [notification])
+    const changeNotification = (name, address, postingDate, sendingTimes, response) => {
+        setName(name);
+        setAddress(address);
+        setPostingDate(postingDate);
+        setSendingTimes(sendingTimes);
+        setResponse(response);
+    };
 
-    const onClickUpdate = () => {
-        navigate("/")
-        axios
+    const onClickUpdate = async () => {
+        await axios
             .patch("http://localhost:8080/notifications/" + id, {
                 name: name,
                 address: address,
@@ -67,12 +64,13 @@ export const EditNotification = () => {
                 sendingTimes: sendingTimes,
                 response: response,
             })
-            .then(response => {
-                console.log(response);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+            .then(() => showMessage({
+                title: "更新に成功しました。", status: "success"
+            }))
+            .catch(() => showMessage({
+                title: "更新に失敗しました。入力に誤りがあります。", status: "error"
+            }));
+        navigate("/")
     }
 
     return (
@@ -83,57 +81,7 @@ export const EditNotification = () => {
                     <Box>
                         <Text fontSize="lg">更新するお知らせの送付状況を入力してください</Text>
                         <br />
-                        <Wrap spacing={10}>
-                            <Box>
-                                <FormControl>
-                                    <FormLabel>名前</FormLabel>
-                                    <Input width={"240px"} placeholder="田中 太郎" value={name} onChange={onChangeName} />
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl>
-                                    <FormLabel>住所</FormLabel>
-                                    <Input width={"240px"} placeholder="東京" value={address} onChange={onChangeAddress} />
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl>
-                                    <FormLabel>お知らせ送付日（直近）</FormLabel>
-                                    <Input width={"240px"} placeholder="2023-12-31（yyyy-mm-dd）" value={postingDate} onChange={onChangePostingDate} />
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl>
-                                    <FormLabel>お知らせ送付回数</FormLabel>
-                                    <Select width={"240px"} placeholder='お知らせ送付回数' value={sendingTimes} onChange={onChangeSendingTimes}>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl>
-                                    <FormLabel>市民からの反応</FormLabel>
-                                    <Select width={"240px"} placeholder='市民からの反応' value={response} onChange={onChangeResponse}>
-                                        <option>有り</option>
-                                        <option>無し</option>
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                        </Wrap>
-                        <br />
-                        <Stack spacing={4} align='center' direction='row'>
-                            <Link to="/">
-                                <Button colorScheme='teal' size='sm' >
-                                    戻る
-                                </Button>
-                            </Link>
-                            <Button colorScheme='teal' size='sm' onClick={onClickUpdate}>
-                                更新
-                            </Button>
-                        </Stack>
+                        <FeatureEditNotification onClickUpdate={onClickUpdate} changeNotification={changeNotification} notification={notification} />
                     </Box>
                 </Box>
             </Box >

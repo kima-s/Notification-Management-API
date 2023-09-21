@@ -53,7 +53,7 @@ public class NotificationController {
 
     @PatchMapping("/notifications/{id}")
     public ResponseEntity<Map<String, String>> update(
-            @PathVariable("id") int id, @RequestBody UpdateForm form) {
+            @PathVariable("id") int id, @RequestBody @Validated UpdateForm form) {
         notificationService.updateNotification(form.convertToNotification(id));
         return ResponseEntity.ok(Map.of("message", "notification successfully updated"));
     }

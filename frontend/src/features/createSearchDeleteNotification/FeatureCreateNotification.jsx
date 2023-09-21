@@ -10,8 +10,11 @@ import {
     TableContainer,
     Flex,
 } from "@chakra-ui/react";
+import { useMessage } from "../../hooks/useMessage";
 
 export const FeatureCreateNotification = (props) => {
+
+    const { showMessage } = useMessage();
 
     const { handleValueChange } = props;
 
@@ -27,13 +30,23 @@ export const FeatureCreateNotification = (props) => {
     const onChangeSendingTimes = (e) => setNewSendingTimes(e.target.value);
     const onChangeResponse = (e) => setNewResponse(e.target.value);
 
-    const onClickRegistration = () => {
-        axios
+    const onClickRegistration = async () => {
+        await axios
             .post("http://localhost:8080/notifications", { "name": newName, "address": newAddress, "postingDate": newPostingDate, "sendingTimes": newSendingTimes, "response": newResponse })
-            .then(response => console.log(response))
-            .catch((e) => {
-                console.log(e);
-            });
+            .then((response) => {
+                console.log(response);
+                setNewName("");
+                setNewAddress("");
+                setNewPostingDate("");
+                setNewSendingTimes("");
+                setNewResponse("");
+                showMessage({
+                    title: "登録に成功しました。", status: "success"
+                })
+            })
+            .catch(() => showMessage({
+                title: "登録に失敗しました。入力に誤りがあります。", status: "error"
+            }));
         axios
             .get("http://localhost:8080/notifications")
             .then((response) => {
@@ -52,8 +65,9 @@ export const FeatureCreateNotification = (props) => {
                     <Box>
                         <FormControl>
                             <FormLabel>名前</FormLabel>
-                            <Input width={"240px"} placeholder="田中 太郎" value={newName} onChange={onChangeName} />
+                            <Input width={"240px"} placeholder="田中　太郎" value={newName} onChange={onChangeName} />
                             <Text fontSize={"xs"} color={"red.400"}>※ 入力必須</Text>
+                            <Text fontSize={"xs"} color={"red.400"}>※ 姓と名の間には全角１マス空けてください</Text>
                         </FormControl>
                     </Box>
                     <Box>
@@ -68,6 +82,7 @@ export const FeatureCreateNotification = (props) => {
                             <FormLabel>お知らせ送付日（直近）</FormLabel>
                             <Input width={"240px"} placeholder="2023-12-31（yyyy-mm-dd）" value={newPostingDate} onChange={onChangePostingDate} />
                             <Text fontSize={"xs"} color={"red.400"}>※ 入力必須</Text>
+                            <Text fontSize={"xs"} color={"red.400"}>※ 日付は半角で入力してください</Text>
                         </FormControl>
                     </Box>
                     <Box>
@@ -95,7 +110,7 @@ export const FeatureCreateNotification = (props) => {
                 </Wrap>
                 <br />
                 <Stack spacing={4} align='center' direction='row'>
-                    <Button colorScheme='teal' size='sm' onClick={onClickRegistration}>
+                    <Button colorScheme='orange' size='sm' onClick={onClickRegistration}>
                         登録
                     </Button>
                 </Stack>
