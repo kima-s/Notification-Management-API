@@ -17,7 +17,8 @@ public class CreateForm {
 
     @NotBlank
     private String address;
-    
+
+    @NotNull
     private LocalDate postingDate;
 
     @NotNull

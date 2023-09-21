@@ -42,7 +42,7 @@ export const FeatureSearchNotification = (props) => {
         <Box py={5}>
             <Heading size="lg">検索条件入力</Heading>
             <Box>
-                <Text fontSize="lg">お知らせ状況の検索条件を入力してください</Text>
+                <Text fontSize="lg">お知らせ送付状況の検索条件を入力してください</Text>
                 <br />
                 <Wrap spacing={10}>
                     <Box>

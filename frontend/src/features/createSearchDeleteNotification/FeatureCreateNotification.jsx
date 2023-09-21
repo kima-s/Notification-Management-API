@@ -10,8 +10,11 @@ import {
     TableContainer,
     Flex,
 } from "@chakra-ui/react";
+import { useMessage } from "../../hooks/useMessage";
 
 export const FeatureCreateNotification = (props) => {
+
+    const { showMessage } = useMessage();
 
     const { handleValueChange } = props;
 
@@ -37,10 +40,13 @@ export const FeatureCreateNotification = (props) => {
                 setNewPostingDate("");
                 setNewSendingTimes("");
                 setNewResponse("");
+                showMessage({
+                    title: "登録に成功しました。", status: "success"
+                })
             })
-            .catch((e) => {
-                console.log(e);
-            });
+            .catch(() => showMessage({
+                title: "登録に失敗しました。入力に誤りがあります。", status: "error"
+            }));
         axios
             .get("http://localhost:8080/notifications")
             .then((response) => {
@@ -76,6 +82,7 @@ export const FeatureCreateNotification = (props) => {
                             <FormLabel>お知らせ送付日（直近）</FormLabel>
                             <Input width={"240px"} placeholder="2023-12-31（yyyy-mm-dd）" value={newPostingDate} onChange={onChangePostingDate} />
                             <Text fontSize={"xs"} color={"red.400"}>※ 入力必須</Text>
+                            <Text fontSize={"xs"} color={"red.400"}>※ 日付は半角で入力してください</Text>
                         </FormControl>
                     </Box>
                     <Box>
