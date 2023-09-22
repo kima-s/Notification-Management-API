@@ -1,6 +1,7 @@
 package com.example.NotificationManagementAPI.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Notification {
     private int id;
@@ -67,5 +68,17 @@ public class Notification {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Notification that)) return false;
+        return id == that.id && sendingTimes == that.sendingTimes && Objects.equals(name, that.name) && Objects.equals(address, that.address) && Objects.equals(postingDate, that.postingDate) && Objects.equals(response, that.response);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, postingDate, sendingTimes, response);
     }
 }
