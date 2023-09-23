@@ -1,0 +1,26 @@
+notifications:
+  - id: 1
+    name: "清⽔　健太"
+    address: "奈良"
+    posting_date: "2022-09-20"
+    sending_times: 1
+    response: "有り"
+  - id: 2
+    name: "田中　美和子"
+    address: "群馬"
+    posting_date: "2022-09-18"
+    sending_times: 2
+    response: "無し"
+  - id: 3
+    name: "松田　力"
+    address: "富山"
+    posting_date: "2022-09-15"
+    sending_times: 2
+    response: "無し"
+  - id: 4
+    name: "太田　幸子"
+    address: "熊本"
+    posting_date: "2023-09-12"
+    sending_times: 2
+    response: "有り"
+

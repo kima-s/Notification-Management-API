@@ -14,6 +14,15 @@ public class Notification {
     public Notification() {
     }
 
+    public Notification(int id, String name, String address, LocalDate postingDate, int sendingTimes, String response) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.postingDate = postingDate;
+        this.sendingTimes = sendingTimes;
+        this.response = response;
+    }
+
     public Notification(String name, String address, LocalDate postingDate, int sendingTimes, String response) {
         this.name = name;
         this.address = address;
