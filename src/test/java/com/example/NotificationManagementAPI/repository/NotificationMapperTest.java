@@ -27,69 +27,69 @@ public class NotificationMapperTest {
 
     @Test
     @Sql(
-            scripts = {"classpath:/sqlannotation/delete-users.sql", "classpath:/sqlannotation/insert-users.sql"},
+            scripts = {"classpath:/sqlannotation/delete-notifications.sql", "classpath:/sqlannotation/insert-notifications.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
     @Transactional
-    void すべてのユーザーが取得できること() {
+    void すべてのお知らせが取得できること() {
         List<Notification> notifications = notificationMapper.findByConditions("", null, null, "");
         assertThat(notifications)
                 .hasSize(3)
                 .contains(
-                        new Notification("田中　太郎", "東京", LocalDate.of(2023, 7, 20), 1, "無し"),
-                        new Notification("田中　太郎", "東京", LocalDate.of(2023, 7, 20), 1, "無し"),
-                        new Notification("田中　太郎", "東京", LocalDate.of(2023, 7, 20), 1, "無し")
+                        new Notification(1, "田中　太郎", "東京", LocalDate.of(2023, 7, 20), 1, "無し"),
+                        new Notification(2, "山田　茜", "山形", LocalDate.of(2023, 8, 5), 2, "有り"),
+                        new Notification(3, "佐藤　四郎", "福岡", LocalDate.of(2023, 6, 13), 1, "無し")
                 );
     }
 
     @Test
     @Sql(
-            scripts = {"classpath:/sqlannotation/delete-users.sql", "classpath:/sqlannotation/insert-users.sql"},
+            scripts = {"classpath:/sqlannotation/delete-notifications.sql", "classpath:/sqlannotation/insert-notifications.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
     @Transactional
-    void IDに紐づくユーザーが1件取得できること() {
-        Optional<User> users = userMapper.findById(1);
-        assertThat(users)
+    void IDに紐づくお知らせが1件取得できること() {
+        Optional<Notification> notifications = notificationMapper.findById(1);
+        assertThat(notifications)
                 .contains(
-                        new User(1, "清⽔", "Tokyo", 29)
+                        new Notification(1, "田中　太郎", "東京", LocalDate.of(2023, 7, 20), 1, "無し")
                 );
     }
 
     @Test
     @Sql(
-            scripts = {"classpath:/sqlannotation/delete-users.sql", "classpath:/sqlannotation/insert-users.sql"},
+            scripts = {"classpath:/sqlannotation/delete-notifications.sql", "classpath:/sqlannotation/insert-notifications.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
     @Transactional
-    void 存在しないユーザーのIDを指定したときに空のOptionalが返されること() {
-        Optional<User> users = userMapper.findById(4);
-        assertThat(users)
+    void 存在しないお知らせのIDを指定したときに空のOptionalが返されること() {
+        Optional<Notification> notifications = notificationMapper.findById(4);
+        assertThat(notifications)
                 .isEmpty();
     }
 
     @Test
-    @DataSet(value = "datasets/users.yml")
-    @ExpectedDataSet(value = "datasets/expectedUsers.yml", ignoreCols = "id")
+    @DataSet(value = "datasets/notifications.yml")
+    @ExpectedDataSet(value = "datasets/expectedNotifications.yml", ignoreCols = "id")
     @Transactional
-    void ユーザーを１件登録できること() {
-        userMapper.createUser(new User(4, "山中", "Mie", 38));
+    void お知らせを１件登録できること() {
+        notificationMapper.createNotification(new Notification(4, "太田　幸子", "熊本", LocalDate.of(2023, 9, 12), 2, "有り"));
     }
 
     @Test
-    @DataSet(value = "datasets/users.yml")
-    @ExpectedDataSet(value = "datasets/expectedUsers2.yml")
+    @DataSet(value = "datasets/notifications.yml")
+    @ExpectedDataSet(value = "datasets/expectedNotifications2.yml")
     @Transactional
-    void IDを指定したときにユーザーを更新できること() {
-        userMapper.updateUser(new User(3, "山中", "Mie", 38));
+    void IDを指定したときにお知らせを更新できること() {
+        notificationMapper.updateNotification(new Notification(3, "松田　力", "富山", LocalDate.of(2023, 9, 20), 3, "有り"));
     }
 
     @Test
-    @DataSet(value = "datasets/users.yml")
-    @ExpectedDataSet(value = "datasets/expectedUsers3.yml")
+    @DataSet(value = "datasets/notifications.yml")
+    @ExpectedDataSet(value = "datasets/expectedNotifications3.yml")
     @Transactional
-    void IDを指定したときにユーザーを削除できること() {
-        userMapper.deleteUser(3);
+    void IDを指定したときにお知らせを削除できること() {
+        notificationMapper.deleteNotification(3);
     }
 }
 
