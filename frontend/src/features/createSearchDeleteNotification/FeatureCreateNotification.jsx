@@ -110,7 +110,7 @@ export const FeatureCreateNotification = (props) => {
                 </Wrap>
                 <br />
                 <Stack spacing={4} align='center' direction='row'>
-                    <Button colorScheme='orange' size='sm' onClick={onClickRegistration}>
+                    <Button colorScheme='orange' variant='outline' size='sm' onClick={onClickRegistration}>
                         登録
                     </Button>
                 </Stack>
