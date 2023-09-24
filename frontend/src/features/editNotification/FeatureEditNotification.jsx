@@ -62,6 +62,7 @@ export const FeatureEditNotification = (props) => {
                         <FormLabel>お知らせ送付日（直近）</FormLabel>
                         <Input width={"240px"} placeholder="2023-12-31（yyyy-mm-dd）" value={postingDate} onChange={onChangePostingDate} />
                         <Text fontSize={"xs"} color={"red.400"}>※ 入力必須</Text>
+                        <Text fontSize={"xs"} color={"red.400"}>※ 日付は半角で入力してください</Text>
                     </FormControl>
                 </Box>
                 <Box>
@@ -90,11 +91,11 @@ export const FeatureEditNotification = (props) => {
             <br />
             <Stack spacing={4} align='center' direction='row'>
                 <Link to="/">
-                    <Button colorScheme='orange' size='sm' >
+                    <Button colorScheme='orange' variant='outline' size='sm' >
                         戻る
                     </Button>
                 </Link>
-                <Button colorScheme='orange' size='sm' onClick={onClickUpdate}>
+                <Button colorScheme='orange' variant='outline' size='sm' onClick={onClickUpdate}>
                     更新
                 </Button>
             </Stack>

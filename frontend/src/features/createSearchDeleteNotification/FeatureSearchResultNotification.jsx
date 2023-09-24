@@ -41,6 +41,7 @@ export const FeatureSearchResultNotification = (props) => {
     return (
         <Box py={5}>
             <Heading size="lg">検索結果</Heading>
+            <Text fontSize={"xs"} color={"red.400"}>※ 反応が無く、送付後３週間経過している場合、赤く色付けされます。</Text>
             <Box>
                 <TableContainer>
                     <Table variant='simple' size="sm">
@@ -64,7 +65,7 @@ export const FeatureSearchResultNotification = (props) => {
                                     <Td>{resultNotifications.sendingTimes}</Td>
                                     <Td>{resultNotifications.response}</Td>
                                     <Td>
-                                        <Button colorScheme='orange' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
+                                        <Button colorScheme='orange' variant='outline' size='sm' onClick={() => deleteNotification(resultNotifications.id)}>
                                             削除
                                         </Button>
                                     </Td>

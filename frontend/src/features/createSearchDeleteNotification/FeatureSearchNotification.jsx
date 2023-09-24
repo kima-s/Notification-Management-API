@@ -79,7 +79,7 @@ export const FeatureSearchNotification = (props) => {
                     </Box >
                     <Stack spacing={4} direction='row'>
                         <Flex alignItems="flex-end">
-                            <Button colorScheme='orange' size='sm' onClick={onClickSearch}>
+                            <Button colorScheme='orange' variant='outline' size='sm' onClick={onClickSearch}>
                                 検索
                             </Button>
                         </Flex>
