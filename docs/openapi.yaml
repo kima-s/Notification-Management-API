@@ -1,6 +1,6 @@
 openapi: "3.0.3"
 info:
-  title: Notification sending status management API
+  title: Notification management API
   description: お知らせの送付状況管理アプリ仕様書です。
   version: 1.0.0
 servers:
@@ -8,8 +8,6 @@ servers:
 tags:
   - name: notification
     description: 送付状況の管理に関する操作
-  - name: mail
-    description: メール送信に関する操作
 paths:
   /notifications:
     get:
@@ -25,20 +23,27 @@ paths:
           schema:
             type: string
           example: 田中　太郎
-        - name: Elapsed days
+        - name: elapsedDays
           in: query
           description: 送付後指定した日数以上経過した人の送付状況が検索される
           required: false
           schema:
             type: int
           example: 21
-        - name: sending times
+        - name: sendingTimes
           in: query
           description: 送付回数が入力した回数の人の送付状況が検索される
           required: false
           schema:
             type: int
           example: 1
+        - name: response
+          in: query
+          description: 入力した送付状況に該当する人の送付状況が検索される
+          required: false
+          schema:
+            type: string
+          example: 有り
       responses:
         "200":
           description: OK
@@ -49,7 +54,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    notificationId:
+                    id:
                       type: int
                       example: 1
                     name:
@@ -58,15 +63,35 @@ paths:
                     address:
                       type: string
                       example: 東京
-                    posting date:
+                    postingDate:
                       type: String
                       example: 2023-01-01
-                    sending times:
+                    sendingTimes:
                       type: int
                       example: 1
                     response:
                       type: string
                       example: 有り
+        "400":
+          description:  BadRequest
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: Bad Request
+                  path:
+                    type: string
+                    example: 指定したパス
+                
                   
     post:
       tags:
@@ -88,11 +113,11 @@ paths:
                   type: string
                   nullable: false
                   example: 東京  
-                posting date:
+                postingDate:
                   type: string
                   nullable: false
                   example: 2023-01-01
-                sending times:
+                sendingTimes:
                   type: int
                   nullable: false
                   example: 1
@@ -110,22 +135,35 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 送付状況が正常に登録されました
+                    example: notification successfully created
         "400":
-          description: Bad Request
+          description:  Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequestNotification'
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: Bad Request
+                  path:
+                    type: string
+                    example: 指定したパス
                 
-  /notifications/{notificationId}:
+  /notifications/{id}:
     patch:
       tags:
         - notification
       summary: 送付状況の更新
       description: 指定した条件の送付状況を更新する
       parameters:
-        - name: notificationId
+        - name: id
           in: path
           description: 更新したい送付状況のID
           required: true
@@ -147,11 +185,11 @@ paths:
                   type: string
                   nullable: false
                   example: 東京  
-                posting date:
+                postingDate:
                   type: string
                   nullable: false
                   example: 2023-01-01
-                sending times:
+                sendingTimes:
                   type: int
                   nullable: false
                   example: 1
@@ -169,19 +207,26 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 送付状況が正常に更新されました
+                    example: notification successfully updated
         "400":
-          description: Bad Request
+          description:  BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequestNotification'
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFound'
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: Bad Request
+                  path:
+                    type: string
+                    example: 指定したパス
                 
     delete:
       tags:
@@ -189,7 +234,7 @@ paths:
       summary: 送付状況の削除
       description: 指定したIDの送付状況を削除する
       parameters:
-        - name: notificationId
+        - name: id
           in: path
           description: 削除したい送付状況のID
           required: true
@@ -206,51 +251,5 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 送付状況が正常に削除されました
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFound'
-  
-components:
-  schemas:
-    BadRequestNotification:
-      description: 送付状況に関する操作でリクエストボディに不備がある場合のレスポンス
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: string
-          example: 400
-        error:
-          type: string
-          example: Bad Request
-        message:
-          type: string
-          example: 入力情報に不備が有ります。
-        path:
-          type: string
-          example: 指定したパス
-    NotFound:
-      description: 指定したリソースが存在しない場合のレスポンス
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: string
-          example: 404
-        error:
-          type: string
-          example: Not Found
-        message:
-          type: string
-          example: Not Found
-        path:
-          type: string
-          example: 指定したパス
+                    example: notification successfully deleted
+                    
