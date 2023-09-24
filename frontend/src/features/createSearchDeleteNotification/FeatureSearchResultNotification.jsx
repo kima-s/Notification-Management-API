@@ -10,6 +10,7 @@ import {
     TableContainer,
     Flex,
 } from "@chakra-ui/react";
+import "../../App.css";
 import { Link } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 
@@ -18,7 +19,6 @@ export const FeatureSearchResultNotification = (props) => {
     const { showMessage } = useMessage();
 
     const { resultNotifications, handleValueDelete } = props;
-
 
     const deleteNotification = (id) => {
         axios
@@ -34,6 +34,9 @@ export const FeatureSearchResultNotification = (props) => {
                 console.log(e);
             });
     };
+
+    const deadline = new Date(Date.now());
+    deadline.setDate(deadline.getDate() - 21);
 
     return (
         <Box py={5}>
@@ -52,7 +55,7 @@ export const FeatureSearchResultNotification = (props) => {
                         </Thead>
                         <Tbody>
                             {resultNotifications.map((resultNotifications, index) => (
-                                <Tr key={index} >
+                                <Tr key={index} style={(new Date(resultNotifications.postingDate) < deadline) ? (resultNotifications.response === "無し") ? { background: "#ffe4e1" } : {} : {}}>
                                     <Td color={"blue"}>
                                         <Link to={"/EditNotification/" + resultNotifications.id} >{resultNotifications.name}</Link>
                                     </Td>
