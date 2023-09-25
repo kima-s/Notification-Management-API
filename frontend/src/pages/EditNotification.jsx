@@ -3,14 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
-    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Flex,
+    Box, Heading, Text
 } from "@chakra-ui/react";
 import { FeatureEditNotification } from "../features/editNotification/FeatureEditNotification";
 import { useMessage } from "../hooks/useMessage";

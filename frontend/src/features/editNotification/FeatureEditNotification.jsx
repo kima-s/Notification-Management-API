@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import {
-    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Flex,
+    Box, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack
 } from "@chakra-ui/react";
-
 
 export const FeatureEditNotification = (props) => {
 
