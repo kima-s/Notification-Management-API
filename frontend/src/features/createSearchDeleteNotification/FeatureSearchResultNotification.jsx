@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
+    Box, Heading, Text, Button, Table,
     Thead,
     Tbody,
     Tr,
     Th,
     Td,
-    TableContainer,
-    Flex,
+    TableContainer
 } from "@chakra-ui/react";
 import "../../App.css";
 import { Link } from "react-router-dom";

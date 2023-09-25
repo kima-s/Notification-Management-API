@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Flex,
+    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Flex,
 } from "@chakra-ui/react";
 
 export const FeatureSearchNotification = (props) => {
@@ -17,7 +10,6 @@ export const FeatureSearchNotification = (props) => {
     const [searchElapsedDays, setSearchElapsedDays] = useState("");
     const [searchSendingTimes, setSearchSendingTimes] = useState("");
     const [searchResponse, setSearchResponse] = useState("");
-
 
     const onChangeSearchName = (e) => setSearchName(e.target.value);
     const onChangeSearchElapsedDays = (e) => setSearchElapsedDays(e.target.value);

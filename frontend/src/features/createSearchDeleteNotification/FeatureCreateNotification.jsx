@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Flex,
+    Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack
 } from "@chakra-ui/react";
 import { useMessage } from "../../hooks/useMessage";
 
@@ -116,6 +109,5 @@ export const FeatureCreateNotification = (props) => {
                 </Stack>
             </Box>
         </Box>
-
     );
 };
