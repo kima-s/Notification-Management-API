@@ -4,6 +4,7 @@ import {
     Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack
 } from "@chakra-ui/react";
 import { useMessage } from "../../hooks/useMessage";
+import { instance } from "../../axios/config";
 
 export const FeatureCreateNotification = (props) => {
 
@@ -24,8 +25,8 @@ export const FeatureCreateNotification = (props) => {
     const onChangeResponse = (e) => setNewResponse(e.target.value);
 
     const onClickRegistration = async () => {
-        await axios
-            .post("http://localhost:8080/notifications", { "name": newName, "address": newAddress, "postingDate": newPostingDate, "sendingTimes": newSendingTimes, "response": newResponse })
+
+        await instance.post("/notifications", { "name": newName, "address": newAddress, "postingDate": newPostingDate, "sendingTimes": newSendingTimes, "response": newResponse })
             .then((response) => {
                 console.log(response);
                 setNewName("");
@@ -40,8 +41,8 @@ export const FeatureCreateNotification = (props) => {
             .catch(() => showMessage({
                 title: "登録に失敗しました。入力に誤りがあります。", status: "error"
             }));
-        axios
-            .get("http://localhost:8080/notifications")
+
+        instance.get("/notifications")
             .then((response) => {
                 handleValueChange(response.data);
             })

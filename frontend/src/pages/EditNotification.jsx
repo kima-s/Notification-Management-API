@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { FeatureEditNotification } from "../features/editNotification/FeatureEditNotification";
 import { useMessage } from "../hooks/useMessage";
+import { instance } from "../axios/config";
 
 export const EditNotification = () => {
 
@@ -33,7 +34,7 @@ export const EditNotification = () => {
     );
 
     useEffect(() => {
-        axios.get("http://localhost:8080/notifications/" + id)
+        instance.get("/notifications/" + id)
             .then(response => {
                 setNotification(response.data);
             })
@@ -49,20 +50,20 @@ export const EditNotification = () => {
     };
 
     const onClickUpdate = async () => {
-        await axios
-            .patch("http://localhost:8080/notifications/" + id, {
+        await
+            instance.patch("/notifications/" + id, {
                 name: name,
                 address: address,
                 postingDate: postingDate,
                 sendingTimes: sendingTimes,
                 response: response,
             })
-            .then(() => showMessage({
-                title: "更新に成功しました。", status: "success"
-            }))
-            .catch(() => showMessage({
-                title: "更新に失敗しました。入力に誤りがあります。", status: "error"
-            }));
+                .then(() => showMessage({
+                    title: "更新に成功しました。", status: "success"
+                }))
+                .catch(() => showMessage({
+                    title: "更新に失敗しました。入力に誤りがあります。", status: "error"
+                }));
         navigate("/")
     }
 

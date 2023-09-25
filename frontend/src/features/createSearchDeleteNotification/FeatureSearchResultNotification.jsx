@@ -12,6 +12,7 @@ import {
 import "../../App.css";
 import { Link } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
+import { instance } from "../../axios/config";
 
 export const FeatureSearchResultNotification = (props) => {
 
@@ -20,8 +21,8 @@ export const FeatureSearchResultNotification = (props) => {
     const { resultNotifications, handleValueDelete } = props;
 
     const deleteNotification = (id) => {
-        axios
-            .delete("http://localhost:8080/notifications/" + id, { data: resultNotifications })
+
+        instance.delete("/notifications/" + id, { data: resultNotifications })
             .then(response => {
                 console.log(response);
                 handleValueDelete(id);

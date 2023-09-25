@@ -4,13 +4,14 @@ import { Box } from "@chakra-ui/react";
 import { FeatureCreateNotification } from "../features/createSearchDeleteNotification/FeatureCreateNotification";
 import { FeatureSearchNotification } from "../features/createSearchDeleteNotification/FeatureSearchNotification";
 import { FeatureSearchResultNotification } from "../features/createSearchDeleteNotification/FeatureSearchResultNotification";
+import { instance } from "../axios/config";
 
 export const CreateSearchDeleteNotification = () => {
 
     const [resultNotifications, setResultNotifications] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/notifications")
+        instance.get("/notifications")
             .then(response => {
                 setResultNotifications(response.data);
             })

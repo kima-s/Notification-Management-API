@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     Box, Heading, FormControl, FormLabel, Input, Text, Wrap, Select, Button, Stack, Flex,
 } from "@chakra-ui/react";
+import { instance } from "../../axios/config";
 
 export const FeatureSearchNotification = (props) => {
     const { handleValueChange } = props;
@@ -17,11 +18,11 @@ export const FeatureSearchNotification = (props) => {
     const onChangeSearchResponse = (e) => setSearchResponse(e.target.value);
 
     const onClickSearch = () => {
-        axios
-            .get("http://localhost:8080/notifications", {
-                params:
-                    { "name": searchName, "elapsedDays": searchElapsedDays, "sendingTimes": searchSendingTimes, "response": searchResponse }
-            })
+
+        instance.get("/notifications", {
+            params:
+                { "name": searchName, "elapsedDays": searchElapsedDays, "sendingTimes": searchSendingTimes, "response": searchResponse }
+        })
             .then(response =>
                 handleValueChange(response.data)
             )
