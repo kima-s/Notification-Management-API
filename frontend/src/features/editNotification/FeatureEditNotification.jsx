@@ -28,7 +28,10 @@ export const FeatureEditNotification = (props) => {
         setResponse(notification.response);
     }, [notification])
 
-    useEffect(() => changeNotification(name, address, postingDate, sendingTimes, response), [name, address, postingDate, sendingTimes, response]);
+    useEffect(() => {
+        changeNotification(name, address, postingDate, sendingTimes, response);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [name, address, postingDate, sendingTimes, response]);
 
     return (
         <>
