@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Box } from "@chakra-ui/react";
 import { FeatureCreateNotification } from "../features/createSearchDeleteNotification/FeatureCreateNotification";
 import { FeatureSearchNotification } from "../features/createSearchDeleteNotification/FeatureSearchNotification";
