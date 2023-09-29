@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
     Box, Heading, Text
 } from "@chakra-ui/react";
-import { FeatureEditNotification } from "../features/editNotification/FeatureEditNotification";
+import { FeatureEditNotification } from "./editNotification/FeatureEditNotification";
 import { useMessage } from "../hooks/useMessage";
 import { instance } from "../axios/config";
 

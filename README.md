@@ -13,14 +13,19 @@
 <img width="884" alt="asIsToBe" src="https://github.com/kima-s/Notification-Management-API/assets/130459578/ba174827-cd82-40a7-ba6b-fd536adf888c">
 
 ## 使用技術
-- バックエンド：Java, Spring Boot, MyBatis
-- フロントエンド：React (JavaScript), Chakra UI
+- バックエンド
+   - Java 17.0.6
+   - SpringBoot 3.1.3
+   - MyBatis
+- フロントエンド
+   - React 18.2.0(JavaScript)
+   - Chakra UI
 - その他
-  - MySQL
-  - Docker
-  - 自動テスト
-  - CI (CheckStyle, Discordへの通知, 自動テストを実行)
-  - AWSデプロイ（予定）
+   - MySQL 8.0.34
+   - Docker 23.0.5
+   - 自動テスト
+   - CI (Checkstyle, Discordへの通知, 自動テストを実行)
+   - AWSデプロイ（予定）
 
 ## アプリケーション概略図
 ![application-schematic-diagram](https://github.com/kima-s/Notification-Management-API/assets/130459578/9b865a77-2263-4947-8b89-f6076cdf3e9c)
@@ -55,29 +60,32 @@
 ### 更新画面
 <img width="1439" alt="screenExplanation2" src="https://github.com/kima-s/Notification-Management-API/assets/130459578/b35519b6-a59e-4116-885f-79ca0da525d8">
 
+### 画面遷移図
+![screen-transition-diagram](https://github.com/kima-s/Notification-Management-API/assets/130459578/0d0f247f-a1a8-4d42-904d-3dd07aa8bcfb)
+
 ## API仕様書
 [swaggerを用いたAPI仕様書](https://kima-s.github.io/Notification-Management-API/)
 
 ## ローカルでのアプリケーション起動方法
-- Git, Java, Node.Js, Dockerをインストールする。
+- Git, Java, Node.js, Dockerをインストールする。
 
 -  リポジトリをgit cloneする。  
-git clone https://github.com/kima-s/Notification-Management-API.git
+```git clone https://github.com/kima-s/Notification-Management-API.git```
 
 -  クローンしたディレクトリに移動する。
 
 -  Dockerを起動する。  
-docker compose up
+```docker compose up```
 
 - Spring Bootを起動する。  
-./gradlew bootRun
+```./gradlew bootRun```
 
 - frontendディレクトリに移動する。  
-cd frontend/
+```cd frontend/```
 
 - 依存関係をインストールし、Reactのアプリケーションを起動す る。  
-npm install  
-npm start
+```npm install```  
+```npm start```
 
 ## 自動テスト
 以下のテストコードを実装。
@@ -88,12 +96,17 @@ NotificationMapper
 - 結合テスト  
 NotificationController
 
-自動テストの実行結果
+自動テストの実行結果  
 <img width="559" alt="junitTestReport" src="https://github.com/kima-s/Notification-Management-API/assets/130459578/228c53df-2243-4831-b68a-eeb46d7d1740">
 
 ## 振り返り
-単純な機能しか実装していませんが、当初の予定より大幅に作成期間が伸びて１ヶ月以上かかってしまいました。アプリケーションを作成するのが初めてで、そもそも仕組みを理解するところからだったのでエラーを解決しても、また次のエラー発生の繰り返しでとても大変でした。仕様を最初に固めて、計画を立てて作成することがいかに難しいかを痛感しました。
-機能面で追加したい部分がまだありますが、形にすることができたので一旦満足しています。
+バックエンド側はすでに大枠を作成していたので、当初の予定では２週間ほどでアプリケーション全体を作成する予定を立てていたのですが、大幅に作成期間が伸びて結局１ヶ月以上かかってしまいました。  
+作成期間が伸びてしまった原因として、作業内容の見積もりの甘さが原因でした。自分が想定しているよりも一つ一つの作業に時間がかかりましたし、そもそもアプリケーションを作成するのが初めてで、仕組みや技術を理解してないので想定していない作業もあり時間が経過してしまいました。  
+特にReactでフロント側を実装する際に、コンポーネントとして各機能を切り分けたので、各コンポーネント間で値を共有して利用する実装であったり、ファイル構成は非常に悩みました。  
+業務として取り組むことになると当然納期があると思います。実装予定の仕様を固めて、現実的な作成計画を立ててから作成開始することがいかに難しく大事であるかを痛感しました。  
+また、自分の出来ること出来ないことを正確に把握すると共に、日々知識の習得に励むことも改めて大事だなと感じました。
+次回、アプリケーション作成など取り組む際には、作業内容の細分化や内容把握、作成タイミングでの自分の知識量の把握に努め、より正確な作成期間を定めた上で取り組むようにしたいです。
+
 
 ## 今後の展望
 - エラーの種類に合わせた表示の実装
