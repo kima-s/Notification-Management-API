@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
-import { FeatureCreateNotification } from "../features/createSearchDeleteNotification/FeatureCreateNotification";
-import { FeatureSearchNotification } from "../features/createSearchDeleteNotification/FeatureSearchNotification";
-import { FeatureSearchResultNotification } from "../features/createSearchDeleteNotification/FeatureSearchResultNotification";
+import { FeatureCreateNotification } from "./createSearchDeleteNotification/FeatureCreateNotification";
+import { FeatureSearchNotification } from "./createSearchDeleteNotification/FeatureSearchNotification";
+import { FeatureSearchResultNotification } from "./createSearchDeleteNotification/FeatureSearchResultNotification";
 import { instance } from "../axios/config";
 
 export const CreateSearchDeleteNotification = () => {
