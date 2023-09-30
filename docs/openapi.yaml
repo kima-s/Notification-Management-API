@@ -96,7 +96,7 @@ paths:
     post:
       tags:
         - notification
-      summary: 送付状況の新規登録
+      summary: お知らせ送付状況の新規登録
       description: 送付状況を新たに登録する
       requestBody:
         required: true
@@ -157,11 +157,75 @@ paths:
                     example: 指定したパス
                 
   /notifications/{id}:
+    get:
+      tags:
+        - notification
+      summary: お知らせ送付状況の取得
+      description: 指定したIDの送付状況を取得する
+      parameters:
+        - name: id
+          in: path
+          description: 取得したい送付状況のID
+          required: true
+          schema:
+          type: int
+          example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: int
+                      example: 1
+                    name:
+                      type: string
+                      example: 田中　太郎
+                    address:
+                      type: string
+                      example: 東京
+                    postingDate:
+                      type: String
+                      example: 2023-01-01
+                    sendingTimes:
+                      type: int
+                      example: 1
+                    response:
+                      type: string
+                      example: 有り
+        "404":
+          description: NotFound
+          content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                 error:
+                   type: string
+                   example: Not Found
+                 path:
+                   type: string
+                   example: 指定したパス
+                 status:
+                   type: string
+                   example: 404
+                 message:
+                   type: string
+                   example: resource not found
+                 timestamp:
+                   type: string
+                   format: date-time
+                 
     patch:
       tags:
         - notification
-      summary: 送付状況の更新
-      description: 指定した条件の送付状況を更新する
+      summary: お知らせ送付状況の更新
+      description: 指定したIDの送付状況を更新する
       parameters:
         - name: id
           in: path
@@ -231,7 +295,7 @@ paths:
     delete:
       tags:
         - notification
-      summary: 送付状況の削除
+      summary: お知らせ送付状況の削除
       description: 指定したIDの送付状況を削除する
       parameters:
         - name: id
