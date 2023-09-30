@@ -60,7 +60,7 @@
 ### 更新画面
 <img width="1439" alt="screenExplanation2" src="https://github.com/kima-s/Notification-Management-API/assets/130459578/b35519b6-a59e-4116-885f-79ca0da525d8">
 
-### 画面遷移図
+## 画面遷移図
 ![screen-transition-diagram](https://github.com/kima-s/Notification-Management-API/assets/130459578/0d0f247f-a1a8-4d42-904d-3dd07aa8bcfb)
 
 ## API仕様書
