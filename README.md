@@ -25,7 +25,7 @@
    - Docker 23.0.5
    - 自動テスト
    - CI (Checkstyle, Discordへの通知, 自動テストを実行)
-   - AWSデプロイ（予定）
+   - AWSデプロイ
 
 ## アプリケーション概略図
 ![application-schematic-diagram](https://github.com/kima-s/Notification-Management-API/assets/130459578/9b865a77-2263-4947-8b89-f6076cdf3e9c)
